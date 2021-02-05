@@ -37,7 +37,7 @@ const Review = ({ review, report }) => {
                     <small>
                       {review.author.name}
                       <span className={style.spacer} />
-                      {moment(review.createdAt).format('MMM D, YYYY')}
+                      {moment(Number(review.createdAt)).format('MMM D, YYYY')}
                     </small>
                   </p>
                 </h5>

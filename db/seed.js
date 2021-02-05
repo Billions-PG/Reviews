@@ -1,3 +1,13 @@
+const { Pool } = require('pg');
+const icons = require('../src/assets/icons.js');
+
+const pool = new Pool({
+  user: 'postgres',
+  host: 'localhost',
+  port: 5432,
+  database: 'billionspg',
+});
+
 const names = `Anita Olson
 Jan Barnett
 Lee Kelly
@@ -6,7 +16,7 @@ Muriel Richards
 Lucia Taylor
 Nettie Sims
 Jennie Mccarthy
-Julian Fernandez
+Julia Fernandez
 Erica Curtis
 Estelle Wong
 Lila Spencer
@@ -98,12 +108,6 @@ Nina Payne
 Don Powers
 Jimmy Potter
 Gustavo Lambert`.split('\n');
-
-const randRating = () => Math.floor(Math.random() * 6);
-const randPurchased = () => !!Math.floor(Math.random() * 2);
-const icons = require('../../src/assets/icons.js');
-
-const randIcon = () => icons[Math.floor(Math.random() * icons.length)];
 
 const bodies = `There are only three ways to make this work. The first is to let me take care of everything. The second is for you to take care of everything. The third is to split everything 50 / 50. I think the last option is the most preferable, but I'm certain it'll also mean the end of our marriage.
 The trees, therefore, must be such old and primitive techniques that they thought nothing of them, deeming them so inconsequential that even savages like us would know of them and not be suspicious. At that, they probably didn't have too much time after they detected us orbiting and intending to land. And if that were true, there could be only one place where their civilization was hidden.
@@ -219,22 +223,46 @@ const maybePhoto = () => {
   return '';
 };
 
-const randProdId = () => Math.floor(Math.random() * 21).toString();
+const randRating = () => Math.floor(Math.random() * 6);
+const randPurchased = () => !!Math.floor(Math.random() * 2);
+const randIcon = () => icons[Math.floor(Math.random() * icons.length)];
+const randProdId = (x) => (Math.floor(Math.random() * (x)) + 1).toString();
+const randAuthorId = (x) => (Math.floor(Math.random() * (x)) + 1).toString();
+const randName = () => names[Math.floor(Math.random() * names.length)];
+const randBody = () => bodies[Math.floor(Math.random() * bodies.length)];
 
-const reviews = names.reduce((m, i, n) => {
-  const o = {
-    author: {
-      name: i,
-      photo: randIcon(),
-    },
-    rating: randRating(),
-    purchased: randPurchased(),
-    body: bodies[n],
-    photo: maybePhoto(),
-    prodId: randProdId(),
-    createdAt: Date.now(),
-  };
-  return m.concat([o]);
-}, []);
+const authorQuery = 'INSERT INTO authors(name, photo) VALUES ($1, $2)';
+const reviewQuery = 'INSERT INTO reviews(author_id, rating, purchased, body, photo, prod_id, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7)';
 
-module.exports = reviews;
+let i = 0;
+const reviewCount = 10;
+const authorCount = 5;
+
+while (i < authorCount) {
+  const params = [
+    randName(),
+    randIcon(),
+  ];
+  pool.query(authorQuery, params);
+  i += 1;
+}
+
+i = 0;
+
+while (i < reviewCount) {
+  const params = [
+    randAuthorId(authorCount),
+    randRating(),
+    randPurchased(),
+    randBody(),
+    maybePhoto(),
+    randProdId(reviewCount),
+    Date.now(),
+  ];
+  pool.query(reviewQuery, params);
+  i += 1;
+}
+
+module.exports = {
+  pool,
+};

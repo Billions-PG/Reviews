@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
+import PropTypes from 'prop-types';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import { useParams } from 'react-router-dom';
@@ -14,7 +15,7 @@ import style from './stars.module.css';
 
 const Controller = require('../../controllers');
 
-const Reviews = () => {
+const Reviews = ({ addedReview }) => {
   const [reviews, setReviews] = React.useState([]);
   const [avgRating, setAvgRating] = React.useState(5);
   const [removedElement, setRemovedElement] = React.useState(false);
@@ -43,7 +44,7 @@ const Reviews = () => {
       }
     })();
     return () => setRemovedElement(false);
-  }, [prodId, removedElement]);
+  }, [addedReview, removedElement]);
 
   React.useEffect(() => {
     if (!reviews.length) { return; }
@@ -107,6 +108,10 @@ const Reviews = () => {
       && <Report show={reported[0]} id={reported[1]} onHide={() => setReported([false, 0])} />}
     </>
   );
+};
+
+Reviews.propTypes = {
+  addedReview: PropTypes.bool.isRequired,
 };
 
 export default Reviews;

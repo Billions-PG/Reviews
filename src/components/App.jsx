@@ -14,7 +14,7 @@ const App = () => {
       <Switch>
         <Route path="/product/:prodId">
           <NewReview change={addNewReview} />
-          <Reviews new={newReview} />
+          <Reviews addedReview={newReview} />
         </Route>
       </Switch>
     </HashRouter>

@@ -12,7 +12,7 @@ import style from './newreview.module.css';
 
 const axios = require('axios');
 
-const url = 'http://52.53.221.54:3001';
+const url = 'http://localhost:3001';
 
 const NewReview = ({ change }) => {
   const [author, setAuthor] = useState('');
@@ -85,7 +85,7 @@ const NewReview = ({ change }) => {
         </Button>
       </div>
       <Collapse className={style.collapsible} in={show}>
-        <Form data-testid="new" noValidate validated={validated} onSubmit={handleSubmit}>
+        <Form encType="multipart/form-data" data-testid="new" noValidate validated={validated} onSubmit={handleSubmit}>
           <Form.Group controlId="authorName">
             <Form.Label>Name</Form.Label>
             <Form.Control data-testid="name" disabled={submitted} required type="name" value={author} onChange={(e) => setAuthor(e.target.value)} />
