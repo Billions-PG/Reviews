@@ -77,7 +77,7 @@ const Review = ({ review, report }) => {
           </Col>
           <Col md="auto">
 
-            <Row>{review.photo ? <Image src={review.photo} rounded /> : <></>}</Row>
+            <Row>{review.photo !== ' ' ? <Image src={review.photo} rounded /> : <></>}</Row>
 
           </Col>
         </Row>

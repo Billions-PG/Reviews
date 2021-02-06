@@ -44,7 +44,7 @@ const Reviews = ({ addedReview }) => {
       }
     })();
     return () => setRemovedElement(false);
-  }, [addedReview, removedElement]);
+  }, [prodId, addedReview, removedElement]);
 
   React.useEffect(() => {
     if (!reviews.length) { return; }

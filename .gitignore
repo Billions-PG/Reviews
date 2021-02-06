@@ -2,6 +2,9 @@
 /node_modules
 /coverage*
 .env
+*.csv
+newrelic_agent.log
+newrelic.js
 
 # KEEP
 !coverage/lcov-report/index.html

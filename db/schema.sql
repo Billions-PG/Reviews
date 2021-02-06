@@ -21,7 +21,7 @@ CREATE TABLE reviews (
   purchased boolean NOT NULL,
   body varchar(800) NOT NULL,
   photo varchar(100) NOT NULL,
-  prod_id varchar(3) NOT NULL,
+  prod_id varchar(10) NOT NULL,
   created_at bigint NOT NULL,
   PRIMARY KEY (review_id),
   CONSTRAINT fk_author
