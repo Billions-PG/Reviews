@@ -27,5 +27,4 @@ CREATE TABLE reviews (
   CONSTRAINT fk_author
     FOREIGN KEY (author_id)
       REFERENCES authors(author_id)
-
 );

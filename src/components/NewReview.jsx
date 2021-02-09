@@ -12,7 +12,8 @@ import style from './newreview.module.css';
 
 const axios = require('axios');
 
-const url = 'http://localhost:3001';
+const url = 'http://34.224.88.246:3001';
+// const url = 'http://localhost:3001';
 
 const NewReview = ({ change }) => {
   const [author, setAuthor] = useState('');

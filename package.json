@@ -10,7 +10,7 @@
     "test:w": "jest --collectCoverage --watch",
     "schema": "psql -f ./db/schema.sql",
     "seed": "node ./db/seed.js",
-    "start": "PORT=3001 node server/start.js",
+    "start": "node server/start.js",
     "start:dev": "PORT=3001 nodemon server/start.js",
     "build:dev": "MODE=development webpack -w",
     "build": "MODE=production webpack"

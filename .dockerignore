@@ -3,3 +3,7 @@ coverage
 .circleci
 npm-debug.log
 .env
+*.csv
+db/csv/authors.csv
+db/csv/reviews.csv
+db/csv/stress.js

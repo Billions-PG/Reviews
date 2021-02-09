@@ -1,7 +1,6 @@
-FROM node:14
-WORKDIR /fec
-ENV EC2_IP=52.53.221.54
-COPY package*.json ./
+FROM node:latest
+RUN mkdir -p /src/app
+WORKDIR /src/appCOPY . /src/app
 RUN npm install
-COPY . .
-CMD [ "node", "server/start.js" ]
+EXPOSE 3001
+CMD ["npm", "run", "start"]

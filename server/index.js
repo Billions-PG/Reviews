@@ -7,7 +7,7 @@ const icons = require('../src/assets/icons.js');
 
 const pool = new Pool({
   user: 'postgres',
-  host: 'localhost',
+  host: '54.227.14.76',
   port: 5432,
   database: 'billionspg',
 });

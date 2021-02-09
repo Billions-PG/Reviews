@@ -7,3 +7,13 @@ COPY reviews(review_id, author_id, rating, purchased, body, photo, prod_id, crea
 FROM '/Users/josephhuntington/Documents/School/hackReactor/SDC/Reviews/db/csv/reviews.csv'
 DELIMITER ','
 CSV HEADER;
+
+COPY authors(author_id, name, photo)
+FROM '/home/ec2-user/authors.csv'
+DELIMITER ','
+CSV HEADER;
+
+COPY reviews(review_id, author_id, rating, purchased, body, photo, prod_id, created_at)
+FROM '/home/ec2-user/reviews.csv'
+DELIMITER ','
+CSV HEADER;
