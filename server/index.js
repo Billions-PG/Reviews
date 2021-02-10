@@ -48,10 +48,14 @@ app.get('/api/reviews/:id', async (req, res) => {
 app.post('/api/reviews', async (req, res) => {
   const author = await pool.query('INSERT INTO authors(name, photo) VALUES ($1, $2) RETURNING author_id', [req.body.author.name, randIcon()]);
   const query = 'INSERT INTO reviews(author_id, rating, purchased, body, photo, prod_id, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7)';
-  const params = [author.rows[0].author_id, Math.floor(req.body.rating), req.body.purchased, req.body.body, '', req.body.prodId, Date.now()];
+  const params = [author.rows[0].author_id, Math.floor(req.body.rating), req.body.purchased, req.body.body, ' ', req.body.prodId, Date.now()];
   pool.query(query, params);
 
   res.status(201).send();
+});
+
+app.get('/loaderio-b17e154c1e2803dd8ac6b55e9120ab0b/', (req, res) => {
+  res.send('loaderio-b17e154c1e2803dd8ac6b55e9120ab0b');
 });
 
 module.exports = app;
